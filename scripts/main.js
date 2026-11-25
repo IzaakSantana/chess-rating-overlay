@@ -1,6 +1,6 @@
 const config = {
     username: "Isaac_S_S",
-    gameMode: "chess_bullet",
+    gameMode: "chess_rapid",
     initialRating: 0,
     targetRating: 1000,
     currentRating: 600,
