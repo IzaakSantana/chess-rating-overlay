@@ -73,3 +73,47 @@ body {
     color: var(--cream);
     font-size: 16px;
 }
+
+.rating-delta {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.rating-delta.positive {
+    color: #a8d478;
+}
+
+.rating-delta.negative {
+    color: #e76b6b;
+}
+
+.rating-delta.animate {
+    animation: rating-float 2s ease-out forwards;
+}
+
+@keyframes rating-float {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -25px);
+    }
+}
