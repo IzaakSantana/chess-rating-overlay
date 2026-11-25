@@ -24,10 +24,6 @@ body {
     bottom: 0;
     width: 100%;
     padding: 45px 40px 15px;
-    background: linear-gradient(
-        transparent,
-        var(--dark)
-    );
 }
 
 .track {
