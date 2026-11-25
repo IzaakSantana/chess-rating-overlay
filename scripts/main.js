@@ -11,11 +11,20 @@ const progress = document.getElementById("progress");
 const marker = document.getElementById("marker");
 const rating = document.getElementById("rating");
 
+let lastUpdate = Date.now();
+
 document.getElementById("initial-rating").textContent = config.initialRating;
 document.getElementById("target-rating").textContent = config.targetRating;
 
 
 function updateRating(value) {
+    console.log(
+        "Rating anterior:", config.currentRating,
+        "Novo rating:", value
+    );
+
+    console.trace();
+
     config.currentRating = value;
 
     const percentage = Math.max(0, Math.min(100,
@@ -66,18 +75,24 @@ async function fetchLocalRating() {
 
         if (
             Number.isInteger(data.rating) &&
-            data.rating !== config.currentRating
+            data.rating >= 0 &&
+            data.timestamp > lastUpdate
         ) {
+            lastUpdate = data.timestamp;
             updateRating(data.rating);
         }
 
     } catch (error) {
-        console.log("File doesn't exist.")
+        console.error("Erro ao consultar rating local:", error);
     }
 }
 
-setInterval(fetchLocalRating, 500);
+async function init() {
+    updateRating(config.currentRating);
 
-updateRating(config.currentRating);
+    await fetchRating();
 
-fetchRating();
+    setInterval(fetchLocalRating, 500);
+}
+
+init();
