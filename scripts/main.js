@@ -1,6 +1,6 @@
 const config = {
     username: "Isaac_S_S",
-    gameMode: "chess_rapid",
+    gameMode: "chess_bullet",
     initialRating: 0,
     targetRating: 1000,
     currentRating: 600,
@@ -13,6 +13,25 @@ const rating = document.getElementById("rating");
 
 document.getElementById("initial-rating").textContent = config.initialRating;
 document.getElementById("target-rating").textContent = config.targetRating;
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "F8") {
+        event.preventDefault();
+
+        const input = prompt(
+            "Novo rating:",
+            config.currentRating
+        );
+
+        if (input === null || input.trim() === "") return;
+
+        const value = Number(input);
+
+        if (Number.isInteger(value) && value >= 0) {
+            updateRating(value);
+        }
+    }
+});
 
 function updateRating(value) {
     config.currentRating = value;
@@ -56,5 +75,3 @@ async function fetchRating() {
 updateRating(config.currentRating);
 
 fetchRating();
-
-setInterval(fetchRating, config.updateInterval);
