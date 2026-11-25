@@ -14,24 +14,6 @@ const rating = document.getElementById("rating");
 document.getElementById("initial-rating").textContent = config.initialRating;
 document.getElementById("target-rating").textContent = config.targetRating;
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "F8") {
-        event.preventDefault();
-
-        const input = prompt(
-            "Novo rating:",
-            config.currentRating
-        );
-
-        if (input === null || input.trim() === "") return;
-
-        const value = Number(input);
-
-        if (Number.isInteger(value) && value >= 0) {
-            updateRating(value);
-        }
-    }
-});
 
 function updateRating(value) {
     config.currentRating = value;
@@ -71,6 +53,30 @@ async function fetchRating() {
         console.error("Erro ao consultar rating: ", error);
     }
 }
+
+async function fetchLocalRating() {
+    try {
+        const response = await fetch("./data/rating.json", {
+            cache: "no-store"
+        });
+
+        if (!response.ok) return;
+
+        const data = await response.json();
+
+        if (
+            Number.isInteger(data.rating) &&
+            data.rating !== config.currentRating
+        ) {
+            updateRating(data.rating);
+        }
+
+    } catch (error) {
+        console.log("File doesn't exist.")
+    }
+}
+
+setInterval(fetchLocalRating, 500);
 
 updateRating(config.currentRating);
 
