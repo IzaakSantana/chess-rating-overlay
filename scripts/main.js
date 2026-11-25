@@ -1,8 +1,10 @@
-
 const config = {
+    username: "Isaac_S_S",
+    gameMode: "chess_rapid",
     initialRating: 0,
     targetRating: 1000,
-    currentRating: 600
+    currentRating: 600,
+    updateInterval: 30000
 };
 
 const progress = document.getElementById("progress");
@@ -25,4 +27,34 @@ function updateRating(value) {
     rating.textContent = value;
 }
 
+async function fetchRating() {
+    const url = `https://api.chess.com/pub/player/${config.username.toLowerCase()}/stats`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const newRating = data[config.gameMode]?.last?.rating;
+
+        if (typeof newRating !== "number") {
+            throw new Error("Rating não encontrado");
+        }
+
+        if (newRating !== config.currentRating) {
+            updateRating(newRating);
+        }
+
+    } catch (error) {
+        console.error("Erro ao consultar rating: ", error);
+    }
+}
+
 updateRating(config.currentRating);
+
+fetchRating();
+
+setInterval(fetchRating, config.updateInterval);
