@@ -1,0 +1,7 @@
+data/rating.json
+__pycache__/
+.venv/
+.vscode/
+start.bat
+
+
