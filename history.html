@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/history.css">
+    <title>Chess History Overlay</title>
+</head>
+<body>
+    <div class="history-overlay">
+        <div class="stats">
+            <div class="stat">
+                <span id="wins" class="value wins">0</span>
+                <span class="label">Vitórias</span>
+            </div>
+
+            <div class="stat">
+                <span id="losses" class="value losses">0</span>
+                <span class="label">Derrotas</span>
+            </div>
+
+            <div class="stat">
+                <span id="draws" class="value draws">0</span>
+                <span class="label">Empates</span>
+            </div>
+        </div>
+
+        <div class="history-track">
+            <div id="wins-bar"></div>
+            <div id="losses-bar"></div>
+            <div id="draws-bar"></div>
+        </div>
+
+        <div class="summary">
+            <span id="total">0 partidas</span>
+            <span>·</span>
+            <span id="winrate">0% de winrate</span>
+        </div>
+    </div>
+
+    <script src="scripts/history.js"></script>
+</body>
+</html>

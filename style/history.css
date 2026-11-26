@@ -1,0 +1,95 @@
+
+:root {
+    --green: #769656;
+    --red: #d97777;
+    --gray: #aaa4b2;
+    --cream: #eeeed2;
+    --lavender: #cdb8e5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.history-overlay {
+    width: 100%;
+    padding: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.value {
+    font-size: 36px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.label {
+    color: var(--cream);
+    font-size: 16px;
+}
+
+.wins {
+    color: var(--green);
+}
+
+.losses {
+    color: var(--red);
+}
+
+.draws {
+    color: var(--gray);
+}
+
+.history-track {
+    display: flex;
+    height: 5px;
+    margin-top: 20px;
+    background: #ffffff15;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.history-track > div {
+    width: 0%;
+    transition: width 0.8s ease;
+}
+
+#wins-bar {
+    background: var(--green);
+}
+
+#losses-bar {
+    background: var(--red);
+}
+
+#draws-bar {
+    background: var(--gray);
+}
+
+.summary {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 25px;
+    color: var(--lavender);
+}
